@@ -156,6 +156,6 @@ def processor(string1,string2,string3) :
 
 
 
-
+    mcoord_list = [i1, j1, i2, j2, i3, j3]
     print(i1,j1,i2,j2,i3,j3)
-    return i1,j1,i2,j2,i3,j3
+    return mcoord_list

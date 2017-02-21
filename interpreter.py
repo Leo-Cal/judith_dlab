@@ -3,8 +3,13 @@
 
 import rospy
 from std_msgs.msg import String
-from std_msgs import float32
-from state_processor import process
+from std_msgs.msg import Float32
+from state_processor import state_process
+from state_processor import processor
+from action_processor import action_process
+
+mcoord_list = []
+matrix = []
 
 def interpreter () :
 
@@ -12,14 +17,14 @@ def interpreter () :
     rospy.init_node('interpreter')
 
    #Subscribers
-    rospy.Subscriber('action',String,callback1)
     rospy.Subscriber('status',String,callback2)
+    rospy.Subscriber('action',String,callback1)
 
    #Publishers
     pub1 = rospy.Publisher('Xcoord',float32, queue_size = 5)
     pub2 = rospy.Publisher('Ycoord',float32, queue_size = 5)
     pub3 = rospy.Publisher('Zcoord',float32, queue_size = 5)
-    pub4 = rospy.Publisher('status',String, queue_size = 5)
+    #pub4 = rospy.Publisher('status',String, queue_size = 5)
 
     rate = rospy.rate(1)
 
@@ -27,7 +32,7 @@ def interpreter () :
         pub1.publish()
         pub2.publish()
         pub3.publish()
-        pub4.publish()
+        #pub4.publish()
         rate.sleep()
 
    #Callbacks
@@ -36,11 +41,26 @@ def callback1(data) :
     action = data.data
     rospy.loginfo(rospy.get_caller_id() + 'Fetched action %s',data.data)
 
+    i1 = mcoord_list[0]
+    j1 = mcoord_list[1]
+    i2 = mcoord_list[2]
+    j2 = mcoord_list[3]
+    i3 = mcoord_list[4]
+    j3 = mcoord_list[5]
+
+    global matrix
+
+    matrix = action_process(i1,j1,i2,j2,i3,j3,action)
+
+
 def callback2(data) :
 
     status = data.data
     rospy.loginfo(rospy.get_caller_id() + 'Fetched status : %s',data.data)
 
+    global mcoord_list
+
+    mcoord_list = state_process(status)
 
 
 
