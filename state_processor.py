@@ -21,9 +21,9 @@ def state_process(string):
     print(string3)
 
 #Process the strings to get the matricial coordinates of each block
-    processor(string1,string2,string3)
+    mcoord_list = processor(string1,string2,string3)
 
-    return 0
+    return mcoord_list
 
 
 def processor(string1,string2,string3) :

@@ -12,14 +12,14 @@ def action_process(i1,j1,i2,j2,i3,j3,string) :
     and the (x,y,z) coordinates do move the gripper. If coords are null, don't move gripper
     return(string,string) """
 # uncomment lines below for testing purposes
-    #i1 = 0
-    #j1 = 0
-    #i2 = 1
-    #j2 = 0
-    #i3 = 2
-    #j3 = 0
-    #string = "putdown(a,b)"
-
+    """i1 = 0
+    j1 = 0
+    i2 = 1
+    j2 = 0
+    i3 = 2
+    j3 = 0
+    string = "putdown(a,b)"
+"""
 #Block sizes. Adjust as necessary
 
     block_l = 50
@@ -133,11 +133,16 @@ def action_process(i1,j1,i2,j2,i3,j3,string) :
     matrix.append(line)
 
 #uncomment lines below for testing purposes
+    return matrix
+
     """for i in range(2) :
         if i> 0 :
             print(" ")
         for j in range(3) :
             print(matrix[i][j], end = '')
-     """
+    print(matrix[1][0][0])
 
     return matrix
+
+action_process()
+"""
