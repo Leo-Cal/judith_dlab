@@ -27,18 +27,19 @@ def interpreter () :
     #pub4 = rospy.Publisher('status',String, queue_size = 5)
 
     rate = rospy.Rate(0.5)
+    rospy.spin()
 
     while not rospy.is_shutdown() :
 
         global matrix
 
-        matrix = callback1(data)
+
         x = matrix[1][0][0]
         y = matrix[1][0][1]
         z = matrix[1][0][2]
 
         #print(matrix[0])
-        
+
 
 
         rospy.loginfo(x)
@@ -70,7 +71,7 @@ def callback1(data) :
     #use matricial coordinates and action received from topic and process action
     matrix = action_process(i1,j1,i2,j2,i3,j3,action)  #matrix[1][0] is the position to grab or let go the block
 
-    return matrix
+
 
 def callback2(data) :
 
