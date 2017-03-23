@@ -16,7 +16,7 @@ def receiver() :
 
     while not rospy.is_shutdown() :
 
-        action = "pickup(a)"
+        action = "pickup(a)" #action tem que ser recebido do PROLOG
         rospy.loginfo(action)
         pub.publish(action)
         rate.sleep()

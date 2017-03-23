@@ -1,4 +1,5 @@
-def state_process(string):
+
+def state_process(state):
     #MUDAR PROLOG PRA FICAR COM ; ENTRE OS "ON"
 
 #for testing purposes, uncomment line below
