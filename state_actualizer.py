@@ -126,7 +126,7 @@ def state_actualize(state_string,action_string) :
 #------------------------Put_on_tables----------------------#
 
 
-    if action.description == "put_on_table"
+    if action.description == "put_on_table":
 
 
         if action.object == "a":

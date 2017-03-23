@@ -2,9 +2,9 @@
 from __future__ import print_function
 
 
-def action_process(i1,j1,i2,j2,i3,j3,string) :
+def action_process(matrix,string) :
     #i1,j1,i2,j2,i3,j3,string
-    """Receives the 6 matricial coordinates of the blocks and a string
+    """Receives matrix of the 6 matricial coordinates of the blocks and a string
     representing the action. Returns a string with numbers representing the gripper action numbered as follows :
         1 - GOTO
         2 - OPEN_GRIPPER
@@ -20,6 +20,18 @@ def action_process(i1,j1,i2,j2,i3,j3,string) :
     j3 = 0
     string = "putdown(a,b)"
 """
+
+#Initializing individual coordinates from the matrix received
+
+    i1 = matrix[0]
+    j1 = matrix[1]
+
+    i2 = matrix[2]
+    j2 = matrix[3]
+
+    i3 = matrix[4]
+    j3 = matrix[5]
+
 #Block sizes. Adjust as necessary
 
     block_l = 50
@@ -133,7 +145,7 @@ def action_process(i1,j1,i2,j2,i3,j3,string) :
     matrix.append(line)
 
 #uncomment lines below for testing purposes
-    return matrix
+    return element    #TOU RETORNANDO SO A MATRIZ DAS COORDENADAS DO GOTO
 
     """for i in range(2) :
         if i> 0 :
