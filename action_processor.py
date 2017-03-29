@@ -3,7 +3,7 @@ from __future__ import print_function
 
 
 def action_process(matrix,string) :
-    #i1,j1,i2,j2,i3,j3,string
+    #matrix,string
     """Receives matrix of the 6 matricial coordinates of the blocks and a string
     representing the action. Returns a string with numbers representing the gripper action numbered as follows :
         1 - GOTO
@@ -22,6 +22,7 @@ def action_process(matrix,string) :
 """
 
 #Initializing individual coordinates from the matrix received
+
 
     i1 = matrix[0]
     j1 = matrix[1]
@@ -94,33 +95,66 @@ def action_process(matrix,string) :
         i = object_string.find(",")
         object_string = object_string[i+1:]
 
-    if object_string == 'a)' :
+    #If action is pickup, arm must move to object position
+    if action_string == "pickup"  :
 
-        element.append(x_a)
-        element.append(y_a)
-        element.append(z_a)
+        if object_string == 'a)' :
 
-
-    if object_string == 'b)' :
-
-        element.append(x_b)
-        element.append(y_b)
-        element.append(z_b)
+            element.append(x_a)
+            element.append(y_a)
+            element.append(z_a)
 
 
-    if object_string == 'c)' :
+        if object_string == 'b)' :
 
-        element.append(x_c)
-        element.append(y_c)
-        element.append(z_c)
+            element.append(x_b)
+            element.append(y_b)
+            element.append(z_b)
 
 
-#VERIFICAR COMO ta put_on_table NO PROLOG!!!!!!
-    if object_string == 'table)' :
+        if object_string == 'c)' :
 
-        element.append(x_table)
-        element.append(y_table)
-        element.append(z_table)
+            element.append(x_c)
+            element.append(y_c)
+            element.append(z_c)
+
+
+    #VERIFICAR COMO ta put_on_table NO PROLOG!!!!!!
+        if object_string == 'table)' :
+
+            element.append(x_table)
+            element.append(y_table)
+            element.append(z_table)
+
+    #If action is putdown or put_on_table, arm must move to position above object position
+    else :
+
+        if object_string == 'a)' :
+
+            element.append(x_a)
+            element.append(y_a + block_h)
+            element.append(z_a)
+
+
+        if object_string == 'b)' :
+
+            element.append(x_b)
+            element.append(y_b + block_h)
+            element.append(z_b)
+
+
+        if object_string == 'c)' :
+
+            element.append(x_c)
+            element.append(y_c + block_h)
+            element.append(z_c)
+
+    #VERIFICAR COMO ta put_on_table NO PROLOG!!!!!!
+        if object_string == 'table)' :
+
+            element.append(x_table)
+            element.append(y_table + block_h)
+            element.append(z_table)
 
 
 #Construction of Action/Position matrix
@@ -144,7 +178,8 @@ def action_process(matrix,string) :
     matrix.append(acts)
     matrix.append(line)
 
-#uncomment lines below for testing purposes
+
+
     return element    #TOU RETORNANDO SO A MATRIZ DAS COORDENADAS DO GOTO
 
     """for i in range(2) :

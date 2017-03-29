@@ -1,25 +1,29 @@
 
-def state_process(state):
+def state_process(string):
     #MUDAR PROLOG PRA FICAR COM ; ENTRE OS "ON"
+    #state
 
 #for testing purposes, uncomment line below
-    #string = "on(a,b);on(b,table);on(c,table)"
+    #string = "on(a,b);on(b,c);on(c,table)"
 
 
 #Separate the string representing the state into 3 Strings,
 #each representing the state of one block (string1 -> A, string2 -> B, string3 -> C)
+
+
+
     i = string.find(";")
     string1 = string[:i]
-    print(string1)
+    #print(string1)
 
     string = string[i+1:]
 
     i = string.find(";")
     string2 = string[:i]
-    print(string2)
+    #print(string2)
 
     string3 = string[i+1:]
-    print(string3)
+    #print(string3)
 
 #Process the strings to get the matricial coordinates of each block
     mcoord_list = processor(string1,string2,string3)
@@ -158,5 +162,8 @@ def processor(string1,string2,string3) :
 
 
     mcoord_list = [i1, j1, i2, j2, i3, j3]
-    print(i1,j1,i2,j2,i3,j3)
+    #print(i1,j1,i2,j2,i3,j3)
+    #print(mcoord_list)
     return mcoord_list
+
+#state_process()

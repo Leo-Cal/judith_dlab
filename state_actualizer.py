@@ -65,6 +65,8 @@ def state_actualize(state_string,action_string) :
     the state after the action'''
 
     #Initializing as class objects
+    #state_string = "on(a,b);on(b,table);on(c,table)"
+    #action_string = "pickup(a)"S
     state = State(state_string)
     action = Action(action_string)
 
@@ -104,11 +106,11 @@ def state_actualize(state_string,action_string) :
 
             if action.destination == "a":
 
-                state.a = "on(b,a)"
+                state.b = "on(b,a)"
 
             if action.destination == "c":
 
-                state.a = "on(b,c)"
+                state.b = "on(b,c)"
 
 
 
@@ -116,11 +118,11 @@ def state_actualize(state_string,action_string) :
 
             if action.destination == "a":
 
-                state.a = "on(c,a)"
+                state.c = "on(c,a)"
 
             if action.destination == "b":
 
-                state.a = "on(c,b)"
+                state.c = "on(c,b)"
 
 
 #------------------------Put_on_tables----------------------#
@@ -144,4 +146,5 @@ def state_actualize(state_string,action_string) :
 
 
     state_string = "%s;%s;%s"%(state.a,state.b,state.c)
+    #print(state_string)
     return(state_string)

@@ -18,9 +18,10 @@ def communicator() :
     rospy.init_node('communicator')
 
     #Subscribers
-
-    rospy.Subscriber('action',String,callback1)
-    rospy.Subscriber('initial_state',String,callback2)
+    '''Nova ideia : nao subscribe pra nada. recebe direto aqui as
+    informacoes do Prolog'''
+    #rospy.Subscriber('action',String,callback1)
+    #rospy.Subscriber('initial_state',String,callback2)
 
     #Publishers
 
@@ -29,26 +30,33 @@ def communicator() :
     pub3 = rospy.Publisher('z_coord',Float32,queue_size=5)
 
     rate = rospy.Rate(0.5)
-    rospy.spin()
+    #rospy.spin()
+
+
+    #RECEBER DO PROLOG ESSAS VARIAVEIS
+    initial_state = "on(a,table);on(b,table);on(c,table)"
+    lista_action = ["pickup(a)","putdown(a,b)","pickup(c)","putdown(c,a)"]
+
 
     i = 0 #interaction counter
     while not rospy.is_shutdown() :
 
         #Getting matricial coordinates from state and refreshing state
         if i == 0 :
-
-            m_state = state_process(initial_state)
-
-        else:
-
-            initial_state = state
-
-            state = state_actualize(initial_state,action)
-
-            m_state = state_process(state)
+            state_inter = initial_state
+        else :
+            state_inter = state
 
 
-        movement_matrix = action_process(m_state,action) #i.e. : [20,30,10]
+        m_state = state_process(state_inter)
+
+
+        print("Initial state: %s"%state_inter)
+        print("Action: %s"%lista_action[i])
+        print("Matricial state(b4 action): %s"%m_state)
+        print("----------------")
+
+        movement_matrix = action_process(m_state,lista_action[i]) #i.e. : [20,30,10]
 
         x_coord = movement_matrix[0]
         y_coord = movement_matrix[1]
@@ -62,21 +70,29 @@ def communicator() :
         pub2.publish(y_coord)
         pub3.publish(z_coord)
 
+        state = state_actualize(state_inter,lista_action[i])
+        print("New state: %s"%state)
+        print("--------------NEXT INTERACTION---------------")
+
+
         i = i + 1
 
         rate.sleep()
 
 
-def callback1(data) :
+'''def callback1(data) :
     global action
     action = data.data
+    rospy.loginfo(rospy.get_caller_id() + ' Fetched action %s',data.data)
+'''
 
 
-def callback2(data) :
+
+'''def callback2(data) :
     global initial_state
     initial_state = data.data
-
-
+    rospy.loginfo(rospy.get_caller_id() + 'Fetched initial_state %s',data.data)
+'''
 
 if __name__ == '__main__':
     try:
