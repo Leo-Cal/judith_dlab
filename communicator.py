@@ -34,8 +34,8 @@ def communicator() :
 
 
     #RECEBER DO PROLOG ESSAS VARIAVEIS
-    initial_state = "on(a,table);on(b,table);on(c,table)"
-    lista_action = ["pickup(a)","putdown(a,b)","pickup(c)","putdown(c,a)"]
+    initial_state = "on(a,table);on(b,table);on(c,a)"
+    lista_action = ["pickup(c)","put_on_table(c)","pickup(b)","putdown(b,c)","pickup(a)","putdown(a,b)"]
 
 
     i = 0 #interaction counter
@@ -53,7 +53,7 @@ def communicator() :
 
         print("Initial state: %s"%state_inter)
         print("Action: %s"%lista_action[i])
-        print("Matricial state(b4 action): %s"%m_state)
+        print("Matricial state(before action): %s"%m_state)
         print("----------------")
 
         movement_matrix = action_process(m_state,lista_action[i]) #i.e. : [20,30,10]
@@ -71,9 +71,9 @@ def communicator() :
         pub3.publish(z_coord)
 
         state = state_actualize(state_inter,lista_action[i])
-        print("New state: %s"%state)
+        print("New state: %s\n"%state)
         print("--------------NEXT INTERACTION---------------")
-
+        print("\n")
 
         i = i + 1
 
